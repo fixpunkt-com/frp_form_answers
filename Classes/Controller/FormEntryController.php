@@ -128,13 +128,15 @@ class FormEntryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         $this->iconFactory = GeneralUtility::makeInstance(IconFactory::class);
         
 	    if ($this->actionMethodName != 'exportAction') {
-	        $view->getModuleTemplate()->getDocHeaderComponent()->setMetaInformation([]);
+		    if($view->getModuleTemplate()) {
+			    $view->getModuleTemplate()->getDocHeaderComponent()->setMetaInformation([]);
 
-	        $pageRenderer = $this->view->getModuleTemplate()->getPageRenderer();
-	        $pageRenderer->addInlineLanguageLabelFile('EXT:lang/Resources/Private/Language/locallang_core.xlf');
+			    $pageRenderer = $this->view->getModuleTemplate()->getPageRenderer();
+			    $pageRenderer->addInlineLanguageLabelFile('EXT:lang/Resources/Private/Language/locallang_core.xlf');
 
-	        $this->createMenu();
-	        $this->createButtons();
+			    $this->createMenu();
+			    $this->createButtons();
+		    }
 
 	        $view->assign('showSupportArea', $this->showSupportArea());
 	    }
